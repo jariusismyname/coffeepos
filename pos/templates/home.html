@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Feel Good Coffee</h1>
+
+
+<div class="row">
+    {% for Coffee in coffee %}
+<div class="col-md-4 mb-4"> 
+<div class="card" style="width: 18rem;">
+    <img src="{{Coffee.image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{Coffee.name}} </h5>
+      <p class="card-text">${{Coffee.price}}</p>
+      <!-- <a href="#" class="btn btn-primary">Add to Cart</a> -->
+      <a href="{% url 'place_order' %}" class="btn btn-primary">Order Now</a>
+
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+    <div class="row">
+        {% for Coffee in coffee %}
+        <div class="col-md-4 mb-4"> 
+            <div class="card" style="width: 18rem;">
+                <img src="{{ Coffee.image }}" class="card-img-top" alt="{{ Coffee.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ Coffee.name }}</h5>
+                    <p class="card-text">${{ Coffee.price }}</p>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div> -->
+
+{% endfor %}
+{% endblock %}
