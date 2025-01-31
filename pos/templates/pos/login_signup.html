@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Signup</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .form-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-toggle {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .form-toggle button {
+            border: none;
+            background: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #007bff;
+        }
+        .form-toggle button.active {
+            border-bottom: 2px solid #007bff;
+        }
+        .form-container form {
+            display: none;
+        }
+        .form-container form.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <!-- Toggle Buttons -->
+    <div class="form-toggle">
+        <button id="login-toggle" class="active">Login</button>
+        <button id="signup-toggle">Sign Up</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" class="active" action="/login" method="POST">
+        <h3 class="text-center mb-4">Login</h3>
+        <div class="mb-3">
+            <label for="login-email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="login-email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="login-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="login-password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+
+    <!-- Signup Form -->
+    <form id="signup-form" action="/signup" method="POST">
+        <h3 class="text-center mb-4">Sign Up</h3>
+        <div class="mb-3">
+            <label for="signup-name" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="signup-name" name="name" required>
+        </div>
+        <div class="mb-3">
+            <label for="signup-email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="signup-email" name="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="signup-password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="signup-password" name="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="signup-confirm-password" class="form-label">Confirm Password</label>
+            <input type="password" class="form-control" id="signup-confirm-password" name="confirm_password" required>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Sign Up</button>
+    </form>
+</div>
+
+<!-- JavaScript for Toggle -->
+<script>
+    document.getElementById('login-toggle').addEventListener('click', function() {
+        document.getElementById('login-form').classList.add('active');
+        document.getElementById('signup-form').classList.remove('active');
+        this.classList.add('active');
+        document.getElementById('signup-toggle').classList.remove('active');
+    });
+
+    document.getElementById('signup-toggle').addEventListener('click', function() {
+        document.getElementById('signup-form').classList.add('active');
+        document.getElementById('login-form').classList.remove('active');
+        this.classList.add('active');
+        document.getElementById('login-toggle').classList.remove('active');
+    });
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
