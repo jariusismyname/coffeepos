@@ -3,6 +3,24 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from .models import Coffee
 from .forms import OrderForm
+from django.contrib import messages
+from .forms import SignUpForm
+
+def signup_view(request):
+    if request.method == "POST":
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "You have successfully signed up!")
+            return redirect('home')  # Redirect to the home page after successful signup
+        else:
+            messages.error(request, "There was an error with your form.")
+
+    else:
+        form = SignUpForm()
+
+    return render(request, 'pos/login_signup.html', {'form': form})
+
 
 def home(request):
     coffee = Coffee.objects.all()
@@ -20,21 +38,7 @@ def login_signup(request):
             return render(request, 'pos/login_signup.html', {'error': 'Invalid credentials'})
     return render(request, 'pos/login_signup.html')
 
-def signup_view(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        confirm_password = request.POST.get('confirm_password')
-        
-        if password == confirm_password:
-            user = User.objects.create_user(username=email, email=email, password=password)
-            user.first_name = name
-            user.save()
-            return redirect('login')  # Ensure 'login' exists in urlpatterns
-        else:
-            return render(request, 'pos/login_signup.html', {'error': 'Passwords do not match'})
-    return render(request, 'pos/login_signup.html')
+
 
 def place_order(request):
     if request.method == "POST":

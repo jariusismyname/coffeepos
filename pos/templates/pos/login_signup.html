@@ -52,8 +52,9 @@
     </div>
 
     <!-- Login Form -->
-    <form id="login-form" class="active" action="/login" method="POST">
-        <h3 class="text-center mb-4">Login</h3>
+    <form id="login-form" class="active" action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+         <h3 class="text-center mb-4">Login</h3>
         <div class="mb-3">
             <label for="login-email" class="form-label">Email address</label>
             <input type="email" class="form-control" id="login-email" name="email" required>
@@ -65,8 +66,8 @@
         <button type="submit" class="btn btn-primary w-100">Login</button>
     </form>
 
-    <!-- Signup Form -->
-    <form id="signup-form" action="/signup" method="POST">
+    <form id="signup-form" action="{% url 'login_signup' %}" method="POST">
+        {% csrf_token %}
         <h3 class="text-center mb-4">Sign Up</h3>
         <div class="mb-3">
             <label for="signup-name" class="form-label">Full Name</label>
@@ -86,6 +87,7 @@
         </div>
         <button type="submit" class="btn btn-success w-100">Sign Up</button>
     </form>
+    
     <div class="text-center mt-4">
         <a href="{% url 'home' %}" class="btn btn-outline-primary btn-lg w-100">
             I am a customer ➔
